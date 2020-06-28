@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <ctime>
 #include "date.h"
 using namespace std;
 
@@ -7,6 +8,7 @@ class volcano {
     string name;
     double height;
     int last_eruption;
+    int date;
     int get_date(){
         short day, month, year, date;
         cout << "\n Please enter the day (dd): ";
@@ -26,18 +28,28 @@ class volcano {
         int since_last = date - today;
         return since_last;
     };
+
     public:
+        volcano(string name, double height, int last_eruption, int date);
+        ~volcano ();
         void getinfo();
         bool isdormant();
 };
+
+
+volcano::volcano(string name, double height, int last_eruption, int date){
+
+};
+
+volcano::~volcano (){
+    cout << "Destructing object of type volcano";
+};
+
 
 void volcano::getinfo(){
     int date = get_date();
     
 }
-
-
-
 
 int main(){
     
