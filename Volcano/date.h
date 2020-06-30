@@ -1,8 +1,13 @@
+#include <iostream>
+#include <ctime>
 // Defines base year 
 #define FIRST 1800
 /* 01/01/1800 is day 0
    any year before this is negative; every day before minuses 1
    every day after this adds 1 */
+
+
+
 
 bool is_leap(short year){
     /* Checks whether a given year is a leap using the definition
@@ -49,6 +54,26 @@ int calc_date(short day, short month, short year){
     }
     
     date =  (year-FIRST)*365 + day * month + leaps;
-
+    
     return date;
+};
+
+int sys_time() {
+    /* Function to return current system time and convert 
+       it to program time */
+
+    // Get current date/time based on current system
+    // In seconds since 01/01/1970
+    time_t now = time(0);
+
+    std::cout << "Number of second since 01/01/1970" << now << "\n";
+
+
+    tm *ltm = localtime(&now);
+    
+
+
+
+
+
 };

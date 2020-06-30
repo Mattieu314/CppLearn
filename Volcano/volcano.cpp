@@ -6,10 +6,11 @@ using namespace std;
 
 class volcano {
     string name;
-    double height;
-    int last_eruption;
-    int date;
+    double height;          // Elevation of top of volcano crater
+    int date_last;          // Date of last eruption
+    int since_last;         // Time since the last eruption
     int get_date(){
+        /* Get date of last eruption from user */
         short day, month, year, date;
         cout << "\n Please enter the day (dd): ";
         cin >> day;
@@ -23,6 +24,7 @@ class volcano {
 
     
     int time_since_last(int date){
+        /* Calculate time since last eruption */
         int today; // Date when program is ran
         // --- Calculate / get todays date into variable today 
         int since_last = date - today;
@@ -37,8 +39,12 @@ class volcano {
 };
 
 
-volcano::volcano(string name, double height, int last_eruption, int date){
-
+volcano::volcano(string name, double height, int date_last, int since_last){
+    cout << "Object of type volcano is being created" << endl;
+    name = "";
+    height = 0;
+    date_last = 0;
+    since_last = 0;
 };
 
 volcano::~volcano (){
