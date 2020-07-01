@@ -32,19 +32,30 @@ class volcano {
     };
 
     public:
-        volcano(string name, double height, int last_eruption, int date);
+        volcano();
+        volcano(string name, double height, int date_last);
         ~volcano ();
         void getinfo();
         bool isdormant();
 };
 
-
-volcano::volcano(string name, double height, int date_last, int since_last){
-    cout << "Object of type volcano is being created" << endl;
+volcano::volcano(){
     name = "";
     height = 0;
     date_last = 0;
     since_last = 0;
+};
+
+volcano::volcano(string name, double height, int date_last) {
+    cout << "Creating object of type volcano" << endl;
+    cout << "Please enter the following information:"<< endl;
+    cout << "Name of volcano: ";
+    cin >> name;
+    cout << "\n Height of volcano (m above sea level): ";
+    cin >> height;
+    cout << "\n Date of last eruption";
+    cin >> date_last;
+    cout << endl;
 };
 
 volcano::~volcano (){
