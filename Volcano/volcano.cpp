@@ -1,130 +1,103 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <ctime>
-#include "date.h"
+#include "date.hpp"
+
 using namespace std;
 
 class volcano {
-    string name;
-    double height;          // Elevation of top of volcano crater
-    int date_last;          // Date of last eruption
-    int since_last;         // Time since the last eruption
-    /* int get_date(){ */
-    /*     /1* Get date of last eruption from user *1/ */
-    /*     short day, month, year, date; */
-    /*     cout << "\n Please enter the day (dd): "; */
-    /*     cin >> day; */
-    /*     cout << "\n Please enter the month (mm): "; */
-    /*     cin >> month; */
-    /*     cout << "\n Please enter the year (yyyy): "; */
-    /*     cin >> year; */
-    /*     date = calc_date(day, month, year); */
-    /*     return date; */
-    /* }; */
-    
-/*     int time_since_last(int date){ */
-/*         /1* Calculate time since last eruption *1/ */
-/*         int today; // Date when program is ran */
-/*         // --- Calculate / get todays date into variable today */ 
-/*         int since_last = date - today; */
-/*         return since_last; */
-/*     }; */
+    private:
+        string name;
+        double height;          // Elevation of top of volcano crater
+        int date_last;          // Date of last eruption
+        int since_last;         // Time since the last eruption
 
     public:
-        volcano();
-        volcano(string input_name, double input_height);
-        ~volcano ();
+        volcano(); // Default constructor
+        volcano(string input_name, double input_height); // Parameterised constructor
+        ~volcano (); // Destructor
         void getinfo();
         string get_name();
         /* bool isdormant(); */
+        double get_height(){
+            return height;
+        };
 };
 
-// Default consturctor
+// Default constructor
 volcano::volcano(){
+    cout << "Constructing object of type volcano" << endl;
     name = "";
     height = 0;
     date_last = 0;
     since_last = 0;
 };
 
-// Parameterised Constructor
+// Parameterised contructor
 volcano::volcano(string input_name, double input_height){
+    cout << "Constructing object of type volcano: " << input_name << endl;
     name = input_name;
     height = input_height;
 };
 
-// Parameterised constructor
-/* volcano::volcano(string name, double height, int date_last) { */
-/*     cout << "Creating object of type volcano" << endl; */
-/*     cout << "Please enter the following information:"<< endl; */
-/*     cout << "Name of volcano: "; */
-/*     cin >> name; */
-/*     cout << "\n Height of volcano (m above sea level): "; */
-/*     cin >> height; */
-/*     /1* cout << "\n Date of last eruption"; *1/ */
-/*     /1* cin >> date_last; *1/ */
-/*     /1* cout << endl; *1/ */
-/* }; */
-
-volcano::~volcano (){
-    cout << "Destructing object of type volcano: " << name << endl;
-};
-
-// Return info about volcano
+// Return information about volcano
 void volcano::getinfo(){
-    cout << "Name:" << name << endl;
+    cout << "Name: " << name << endl;
     cout << "Height: " << height <<endl;
 };
-
 
 string volcano::get_name(){
     return name;
 };
 
+// Destructor
+volcano::~volcano (){
+    cout << "Destructing object of type volcano: " << name << endl;
+};
+
 /////////////////////////////////////////////////////////////////////////////
  
 // volcanic range class
-
-class volcanic_range{
-    string name;
-    int number_of_volcanoes;
-    vector<volcano> list_of_volcanoes;
+class mountain_type{
+    private:
+        string name;
+        int number_of_volcanoes;
+        vector<volcano> list_of_volcanoes;
 
     public:
-        volcanic_range(); // defualt
-        volcanic_range(string input_name); // parameterised
-        ~volcanic_range(); // destructor
+        mountain_type(); // defualt constructor
+        mountain_type(string input_name); // parameterised constructor
+        ~mountain_type(); // destructor
 
         // Public member functions
         void add_volcano(volcano input_volcano);
         void update_number();
         int get_number();
-
         void get_info();
+        double height_combined(vector<volcano> list_of_volcanoes);
 };
 
 // default constructor
-volcanic_range::volcanic_range(){
+mountain_type::mountain_type(){
     name ="";
     number_of_volcanoes=0;
     list_of_volcanoes = {};
 };
 
 // parameterised constructor
-volcanic_range::volcanic_range(string input_name){
+mountain_type::mountain_type(string input_name){
     name = input_name;
     number_of_volcanoes = 0;
     list_of_volcanoes = {};
 };
 
-volcanic_range::~volcanic_range(){
-    cout << "Destructing object of type volcanic_range: " << name << endl;
+mountain_type::~mountain_type(){
+    cout << "Destructing object of type mountain_type: " << name << endl;
 };
 
 
 // Adding volcano object to list_of_volcanoes
-void volcanic_range::add_volcano(volcano input_volcano){
+void mountain_type::add_volcano(volcano input_volcano){
     cout << "Adding: " << input_volcano.get_name() << endl;
 
     // pushback input volcano into vector
@@ -134,18 +107,18 @@ void volcanic_range::add_volcano(volcano input_volcano){
 };
 
 
-void volcanic_range::update_number(){
+void mountain_type::update_number(){
     // Get length of list_of_voclanoes
     number_of_volcanoes= (int) list_of_volcanoes.size();
 
 };
 
-int volcanic_range::get_number(){
+int mountain_type::get_number(){
     return number_of_volcanoes;
 };
 
 // Print info about each volcano within volcanic range
-void volcanic_range::get_info(){
+void mountain_type::get_info(){
     cout << "=======================" <<endl;
 
     cout << "The number of volcanoes in "<<name<< "is "<<number_of_volcanoes<< endl;
@@ -159,26 +132,39 @@ void volcanic_range::get_info(){
 
     for (int i{0}; i < (int) list_of_volcanoes.size(); i++){
         // Print information
+        cout << "========================" << endl;
         list_of_volcanoes[i].getinfo();
-        cout << "========================" <<endl;
+        cout << "========================" << endl;
     };
+    cout <<" The total height for all volcanoes in " << name
+        << " is " << height_combined(list_of_volcanoes) << "m" << endl;
+};
+
+double mountain_type::height_combined(vector<volcano> list_of_volcanoes){
+    double total_height = 0;
+    for (int i{0}; i< (int) list_of_volcanoes.size(); i++){
+        total_height+=list_of_volcanoes[i].get_height();
+    };
+    return total_height;
 };
 
 int main(){
     
-    volcano etna("Mt. Etna",2000);
-    volcano st_helens("Mount St. Helens", 1000);
+    volcano etna("Mt. Etna",3326);
+    volcano st_helens("Mount St. Helens", 2549);
 
-    // construct a volcanic_range object
-    volcanic_range test("Unreal Volcanic Range");
-    
-    test.add_volcano(etna);
-    cout << "Number of volcanoes: " << test.get_number() <<endl;
+    // construct a mountain_type object
+    mountain_type strato("Stratovolcano");
 
-    test.add_volcano(st_helens);
-    cout << "Number of volcanoes: " << test.get_number() << endl;
+    strato.add_volcano(etna);
+    cout << "Number of volcanoes: " << strato.get_number() << endl;
 
-    test.get_info();
+    strato.add_volcano(st_helens);
+    cout << "Number of volcanoes: " << strato.get_number() << endl;
+
+    strato.get_info();
+
+
 
     return 0;
-}
+};
