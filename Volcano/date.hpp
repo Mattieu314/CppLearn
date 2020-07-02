@@ -53,11 +53,15 @@ int calc_date(short day, short month, short year){
     return date;
 };
 
-/* int sys_time() { */
-/*     /1* Function to return current system time and convert */ 
-/*        it to program time *1/ */
+int sys_time() {
+    /* Function to return current system time and convert 
+       it to program time */
 
-/*     // Get current date/time based on current system */
-/*     // In seconds since 01/01/1970 */
-/*     time_t now = time(0); */
-/* }; */
+    // Get current date/time based on current system
+    // In seconds since 01/01/1970
+    time_t now = time(0);
+    std::cout << now << std::endl;
+
+
+
+};

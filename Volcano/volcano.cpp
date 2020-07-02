@@ -1,7 +1,6 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include "date.hpp"
 
 using namespace std;
 
@@ -9,19 +8,16 @@ class volcano {
     private:
         string name;
         double height;          // Elevation of top of volcano crater
-        int date_last;          // Date of last eruption
-        int since_last;         // Time since the last eruption
 
     public:
         volcano(); // Default constructor
         volcano(string input_name, double input_height); // Parameterised constructor
         ~volcano (); // Destructor
-        void getinfo();
         string get_name();
-        /* bool isdormant(); */
         double get_height(){
             return height;
         };
+        void getinfo();
 };
 
 // Default constructor
@@ -29,8 +25,6 @@ volcano::volcano(){
     cout << "Constructing object of type volcano" << endl;
     name = "";
     height = 0;
-    date_last = 0;
-    since_last = 0;
 };
 
 // Parameterised contructor
@@ -122,13 +116,10 @@ void mountain_type::get_info(){
     cout << "=======================" <<endl;
 
     cout << "The number of volcanoes in "<<name<< "is "<<number_of_volcanoes<< endl;
-
-    cout << "=======================" << endl;
-
     // Use iteration to loop through list
 
     cout << "========================" << endl;
-    cout << "The volcanoes contained in "<< name << ":" << endl;
+    cout << "The volcanoes contained in "<< name << " are:" << endl;
 
     for (int i{0}; i < (int) list_of_volcanoes.size(); i++){
         // Print information
@@ -148,8 +139,9 @@ double mountain_type::height_combined(vector<volcano> list_of_volcanoes){
     return total_height;
 };
 
+
+
 int main(){
-    
     volcano etna("Mt. Etna",3326);
     volcano st_helens("Mount St. Helens", 2549);
 
@@ -163,8 +155,6 @@ int main(){
     cout << "Number of volcanoes: " << strato.get_number() << endl;
 
     strato.get_info();
-
-
 
     return 0;
 };
