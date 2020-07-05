@@ -31,6 +31,10 @@ class complex{
         double get_modulus();
         double get_argument();
 
+        /* Output */
+        void print_cart();
+        void print_polar();
+
 
         /* Overloaded operators */
         complex operator+ (complex);

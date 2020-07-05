@@ -3,7 +3,6 @@
 #include <cmath>
 #include "complex.hpp"
 
-// Get user to input the type of complex number they want
 /* Object initialisation */
 complex::complex(){
     std::cout << " -- Constructing object of type complex --\n";
@@ -13,6 +12,10 @@ complex::complex(){
     argument = 0;
 };
 
+/* Parameterised constructor
+   Sets correct variables and calculates corresponding,
+   depending on value of 'cart*
+*/
 complex::complex(double inp_a, double inp_b, bool cart){
     if (cart == true)
     {
@@ -70,6 +73,15 @@ double complex::get_argument(){
     return argument;
 };
 
+/* Output */
+
+void complex::print_cart(){
+    std::cout << real <<" + " << imaginary << "i\n";
+};
+
+void complex::print_polar(){
+    std::cout << modulus << "(cos(" << argument << ") +isin(" << argument << "))\n";
+};
 
 /* Overloaded Operators */
 
