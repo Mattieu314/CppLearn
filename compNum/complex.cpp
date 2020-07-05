@@ -4,100 +4,87 @@
 #include "complex.hpp"
 
 /* Object initialisation */
+
+/* Defualt constructor */
 complex::complex(){
-    std::cout << " -- Constructing object of type complex --\n";
-    real = 0;
-    imaginary = 0;
+    std::cout << " -- Constructing (defualt) object of type complex --" << std::endl;
     modulus = 0;
     argument = 0;
 };
 
-/* Parameterised constructor
-   Sets correct variables and calculates corresponding,
-   depending on value of 'cart*
+/* 
+   Parameterised constructor
+   If user enters cartesian coordinates (polar == false),
+   then modulus and argument are calculated
 */
-complex::complex(double inp_a, double inp_b, bool cart){
-    if (cart == true)
-    {
-        real = inp_a;
-        imaginary = inp_b;
-        modulus = get_modulus();
-        argument = calc_arg();
-    }
-    else
-    {
+complex::complex(double inp_a, double inp_b, bool polar) {
+    if (polar == true) {
         modulus = inp_a;
         argument = inp_b;
-        real = calc_real();
-        imaginary = calc_imaginary();
+        std::cout << "Constructing object of type complex." << std::endl;
+    } else {
+        std::cout << "Converting from cartesian to polar\n";
+        modulus = calc_modulus(inp_a,inp_b);
+        argument = calc_arg(inp_a,inp_b);
+        std::cout << "Constructing object of type complex" << std::endl;
     };
 };
 
+complex::~complex(){
+    std::cout << "Destructing object of type complex" << std::endl;
+}
+
 /* Private member functions */
 
-double complex::calc_modulus(){
+/* Calculate modulus from real and imaginary parameters */
+double complex::calc_modulus(double real, double imaginary){
     modulus = std::sqrt(real*real + imaginary*imaginary);
     return modulus;
 };
 
-double complex::calc_arg(){
-argument = std::atan2(imaginary, real);
+/* Calculate argument from real and imaginary paramaters */
+double complex::calc_arg(double real, double imaginary){
+    argument = std::atan2(imaginary, real);
     return argument;
-};
-
-double complex::calc_real(){
-    real = modulus*std::cos(argument);
-    return real;
-};
-
-double complex::calc_imaginary(){
-    imaginary = modulus*std::sin(argument);
-    return imaginary;
 };
 
 /* Public member functions */
 
-double complex::get_real(){
-    return real;
-};
-
-double complex::get_imaginary(){
-    return imaginary;
-};
-
+/* Return modulus */
 double complex::get_modulus(){
     return modulus;
 };
 
+/* Return argument */
 double complex::get_argument(){
     return argument;
 };
 
+double complex::calc_real(){
+    double real = modulus*std::cos(argument);
+    return real;
+};
+
+double complex::calc_imag(){
+    double imaginary = modulus*std::sin(argument);
+    return imaginary;
+}
+
 /* Output */
-
-void complex::print_cart(){
-    std::cout << real <<" + " << imaginary << "i\n";
-};
-
-void complex::print_polar(){
-    std::cout << modulus << "(cos(" << argument << ") +isin(" << argument << "))\n";
-};
 
 /* Overloaded Operators */
 
 complex complex::operator+ (complex complex_input){
-    double temp_real = real + complex_input.get_real();
-    double temp_imag = imaginary + complex_input.get_imaginary();
-    
-    complex temp_complex(temp_real, temp_imag);
+    double temp_real = calc_real() + complex_input.calc_real();
+    double temp_imag = calc_imag() + complex_input.calc_imag();
+    complex temp_complex(temp_real, temp_imag, false);
     return temp_complex;
 };
 
 complex complex::operator- (complex complex_input){
-    double temp_real = real - complex_input.get_real();
-    double temp_imag = imaginary - complex_input.get_imaginary();
-
-    complex temp_complex(temp_real, temp_imag);
+    double temp_real = calc_real() - complex_input.calc_real();
+    double temp_imag = calc_imag() - complex_input.calc_imag();
+    complex temp_complex(temp_real,temp_imag, false);
     return temp_complex;
 };
 
@@ -105,7 +92,7 @@ complex complex::operator* (complex complex_input){
     double temp_mod = modulus * complex_input.get_modulus();
     double temp_arg = argument + complex_input.get_argument();
 
-    complex temp_complex(temp_mod, temp_arg, false);
+    complex temp_complex(temp_mod, temp_arg);
     return temp_complex;
 };
 
@@ -113,7 +100,7 @@ complex complex::operator/ (complex complex_input){
     double temp_mod = modulus / complex_input.get_modulus();
     double temp_arg = argument - complex_input.get_argument();
 
-    complex temp_complex(temp_mod, temp_arg, false);
+    complex temp_complex(temp_mod, temp_arg);
     return temp_complex;
 };
 

@@ -2,39 +2,29 @@
 #ifndef COMPLEX_HPP //include guard
 #define COMPLEX_HPP
 /*
-    Complex number class holding complex number as:
-        - cartesian: x + iy
-        - polar: r(cos(theta) + isin(theta))
+   Complex number class. 
+   Complex number stored in polar form, defined by its
+   modulus and argument
 */
 class complex{
     private:
-        // Cartesian form
-        double real;        // Real part (x)
-        double imaginary;   // Imaginary part (y)
-        // Polar form
         double modulus;     // Modulus (r)
         double argument;    // Argument (theta)
-
-        /* Private member functions */
-        // cartesian to polar
-        double calc_modulus();     
-        double calc_arg();   
-        // polar to cartesian
-        double calc_real();
-        double calc_imaginary();
+        
+        // Used if user inputs cartesian form 
+        double calc_modulus(double, double);  
+        double calc_arg(double, double);
 
     public:
         complex();      // Defualt constructor
-        complex(double inp_a, double inp_b, bool cart = true);
-        double get_real();
-        double get_imaginary();
+        complex(double inp_b, double inp_a, bool polar = true); // Parameterised constructor
+        ~complex();
+
         double get_modulus();
         double get_argument();
-
-        /* Output */
-        void print_cart();
-        void print_polar();
-
+        
+        double calc_real(); // Calculate and return real part
+        double calc_imag(); // Calculate and return imaginary part
 
         /* Overloaded operators */
         complex operator+ (complex);

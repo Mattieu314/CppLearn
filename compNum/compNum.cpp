@@ -69,15 +69,11 @@ int main(){
     complex B(5,7);
 
     std::cout << "A is "; 
-    A.print_cart(); 
     std::cout << "in cartesian form, or ";
-    A.print_polar() ;
     std::cout<< "in polar form.\n";
 
     std::cout << "B is "; 
-    B.print_cart(); 
     std::cout << "in cartesian form, or ";
-    B.print_polar() ;
     std::cout<< "in polar form.\n";
 
     complex C = A + B;
@@ -86,13 +82,9 @@ int main(){
     complex F = A / B;
 
     std::cout << "Addition";
-    C.print_cart();
     std::cout << "\nSubtraction";
-    D.print_cart();
     std::cout << "\nMultpilication";
-    E.print_cart();
     std::cout << "\nDivision";
-    F.print_cart();
 
     return 0 ;
 };
