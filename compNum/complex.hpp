@@ -1,6 +1,7 @@
 // complex.hpp
 #ifndef COMPLEX_HPP //include guard
 #define COMPLEX_HPP
+#include <iostream>
 /*
    Complex number class. 
    Complex number stored in polar form, defined by its
@@ -31,6 +32,8 @@ class complex{
         complex operator- (complex);
         complex operator* (complex);
         complex operator/ (complex);
+        
+        friend std::ostream &operator<<(std::ostream &, complex &);
 };
 
 

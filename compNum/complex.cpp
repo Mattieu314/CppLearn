@@ -21,17 +21,17 @@ complex::complex(double inp_a, double inp_b, bool polar) {
     if (polar == true) {
         modulus = inp_a;
         argument = inp_b;
-        std::cout << "Constructing object of type complex." << std::endl;
+        std::cout << "-- Constructing object of type complex. --\n" << std::endl;
     } else {
-        std::cout << "Converting from cartesian to polar\n";
+        std::cout << "-- Converting from cartesian to polar --\n";
         modulus = calc_modulus(inp_a,inp_b);
         argument = calc_arg(inp_a,inp_b);
-        std::cout << "Constructing object of type complex" << std::endl;
+        std::cout << "-- Constructing object of type complex --\n" << std::endl;
     };
 };
 
 complex::~complex(){
-    std::cout << "Destructing object of type complex" << std::endl;
+    std::cout << "-- Destructing object of type complex --\n";
 }
 
 /* Private member functions */
@@ -104,3 +104,11 @@ complex complex::operator/ (complex complex_input){
     return temp_complex;
 };
 
+std::ostream &operator<<(std::ostream & os, complex& output){
+    // Define output stream
+    os << output.get_modulus() << "(cos(" << output.get_argument() << ") + isin(" 
+        << output.get_argument() << ")\n";
+
+    // Return output stream
+    return os;
+};
