@@ -1,12 +1,13 @@
-#ifndef DOUBLECHECK_HPP // include guard
-#define DOUBLECHECK_HPP
+// chkType.hpp
+#ifndef CHKTYPE_HPP //include guard
+#define CHKTYPE_HPP
 
 #include <iostream>
 #include <string>
-#include <sstream>
 
-// Used to check that there are there is a number before
-//   and after the decimal point
+// ------------ Check Double -------------
+
+// Checks that there is a number before and after the decimal point
 bool check_point(std::string str_input, int point_pos){
     try {
         if (std::isdigit(str_input[point_pos-1]) \
@@ -20,7 +21,7 @@ bool check_point(std::string str_input, int point_pos){
     };
 };
 
-// Check that there is a number before and after the exponent 
+// Checks that there is a number before and after the exponent ('e'/'E')
 bool check_exp(std::string str_input, int exp_pos){
     try {
         if (std::isdigit(str_input[exp_pos-1]) \
@@ -35,7 +36,7 @@ bool check_exp(std::string str_input, int exp_pos){
     }
 };
 
-// Check that the input number is a double by:
+// Checks that the input number is a double by:
 //       - Confirming it only contains acceptable input
 //        - Has a number before and after a point, if it exists
 //        - Has a number before and after the e, it it exists
@@ -85,16 +86,18 @@ bool is_double(std::string input) {
         return false;
 };
 
-double get_input(){
-    std::string str_input;
-    double d_input;
-    std::getline(std::cin, str_input);
-    while (is_double(str_input) == false) {
-        std::cout << "Your input is invalid. Please re-enter: ";
-        std::cin >> str_input;
+// --------------- Check int -----------------
+
+bool is_int(std::string input){
+    int acceptable = 0; // Number of acceptable characters
+    for (int i = 0; i < (int) input.size(); i++){
+        if (std::isdigit(input[i]))
+                acceptable++;
     };
-    std::stringstream(str_input) >> d_input;
-    return d_input;
+    if (acceptable == (int) input.size())
+        return true;
+    else
+        return false;
 };
 
 #endif

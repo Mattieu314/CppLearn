@@ -10,7 +10,7 @@ compNum: $(OBJS)
 compNum.o: compNum.cpp complex.hpp
 	$(CXX) $(CXXFLAGS) -c compNum.cpp complex.o
 
-complex.o: complex.cpp complex.hpp doubleCheck.hpp
+complex.o: complex.cpp complex.hpp getInp.hpp
 	$(CXX) $(CXXFLAGS) -c complex.cpp
 
 

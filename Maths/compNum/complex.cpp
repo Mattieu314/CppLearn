@@ -1,21 +1,21 @@
 //complex.cpp
 #include <iostream>
 #include <cmath>
+
 #include "complex.hpp"
-#include "doubleCheck.hpp"
-/* Object initialisation */
-/* Defualt constructor */
+#include "getInp.hpp"
+// Object initialisation 
+// Defualt constructor 
 complex::complex(){
     std::cout << " -- Constructing (defualt) object of type complex --" << std::endl;
     modulus = 0;
     argument = 0;
 };
 
-/* 
-   Parameterised constructor
-   If user enters cartesian coordinates (polar == false),
-   then modulus and argument are calculated
-*/
+// Parameterised constructor
+// If user enters cartesian coordinates (polar == false),
+// then modulus and argument are calculated
+
 complex::complex(double inp_a, double inp_b, bool polar) {
     if (polar == true) {
         modulus = inp_a;
@@ -35,9 +35,9 @@ complex::~complex(){
     std::cout << "-- Destructing object of type complex --\n";
 }
 
-/* Private member functions */
+// Private member functions
 
-/* Get user to input whether their input is polar or cartesian */
+// Get user to input whether their input is polar or cartesian
 bool complex::get_type(){
     std::string valid_options = "cCpP";
     std::string input; 
@@ -60,6 +60,28 @@ bool complex::get_type(){
     return polar;
 };
 
+bool complex::is_zero(double a, double b, bool polar){
+    if (polar == true){
+        if (a == 0)
+        {
+            std::cout << "You have entered the zero complex number. Please re-enter.\n";
+            return true;
+        }
+        else 
+            return false;
+    }
+    else // polar == false
+    {
+        if (a == 0 && b == 0)
+        {
+            std::cout << "You have entered the zero complex number. Please re-enter\n";
+            return true;
+        }
+        else
+            return false;
+    };
+};
+
 complex complex::get_user(){
     double inp_a, inp_b;
     bool zero;
@@ -69,18 +91,18 @@ complex complex::get_user(){
     {
         std::cout << "\n====================\n";
         std::cout << "Enter the real part: ";
-        inp_a = get_input();
+        inp_a = get_double();
         std::cout << "Enter the imaginary part: ";
-        inp_b = get_input();
+        inp_b = get_double();
         std::cout << "====================\n";
     }
     else 
     {
         std::cout << "\n====================\n";
         std::cout << "Enter the modulus: ";
-        inp_a = get_input();
+        inp_a = get_double();
         std::cout << "Enter the argument: ";
-        inp_b = get_input();
+        inp_b = get_double();
         std::cout << "====================\n";
     };
     zero = is_zero(inp_a, inp_b, polar);
@@ -94,36 +116,36 @@ complex complex::get_user(){
 
 
 
-/* Calculate modulus from real and imaginary parameters */
+// Calculate modulus from real and imaginary parameters 
 double complex::calc_modulus(double real, double imaginary){
     modulus = std::sqrt(real*real + imaginary*imaginary);
     return modulus;
 };
 
-/* Calculate argument from real and imaginary paramaters */
+// Calculate argument from real and imaginary paramaters
 double complex::calc_arg(double real, double imaginary){
     argument = std::atan2(imaginary, real);
     return argument;
 };
 
-/* Public member functions */
+// Public member functions
 
-/* Return modulus */
-double complex::get_modulus(){
+// Return modulus
+double complex::get_modulus() const{
     return modulus;
 };
 
-/* Return argument */
-double complex::get_argument(){
+// Return argument
+double complex::get_argument() const{
     return argument;
 };
 
-double complex::calc_real(){
+double complex::calc_real() const{
     double real = modulus*std::cos(argument);
     return real;
 };
 
-double complex::calc_imag(){
+double complex::calc_imag() const{
     double imaginary = modulus*std::sin(argument);
     return imaginary;
 }
@@ -152,25 +174,25 @@ complex complex::pow(complex& comp_num, int n){
     return temp_comp;
 };
 
-/* Output */
+// Output
 
-/* Overloaded Operators */
+// Overloaded Operators
 
-complex complex::operator+ (complex complex_input){
+complex complex::operator+ (const complex &complex_input){
     double temp_real = calc_real() + complex_input.calc_real();
     double temp_imag = calc_imag() + complex_input.calc_imag();
     complex temp_complex(temp_real, temp_imag, false);
     return temp_complex;
 };
 
-complex complex::operator- (complex complex_input){
+complex complex::operator- (const complex &complex_input){
     double temp_real = calc_real() - complex_input.calc_real();
     double temp_imag = calc_imag() - complex_input.calc_imag();
     complex temp_complex(temp_real,temp_imag, false);
     return temp_complex;
 };
 
-complex complex::operator* (complex complex_input){
+complex complex::operator* (const complex &complex_input){
     double temp_mod = modulus * complex_input.get_modulus();
     double temp_arg = argument + complex_input.get_argument();
 
@@ -178,7 +200,7 @@ complex complex::operator* (complex complex_input){
     return temp_complex;
 };
 
-complex complex::operator/ (complex complex_input){
+complex complex::operator/ (const complex &complex_input){
     double temp_mod = modulus / complex_input.get_modulus();
     double temp_arg = argument - complex_input.get_argument();
 
@@ -186,7 +208,7 @@ complex complex::operator/ (complex complex_input){
     return temp_complex;
 };
 
-std::ostream &operator<<(std::ostream & os, complex& output){
+std::ostream &operator<<(std::ostream &os, const complex &output){
     // Define output stream
     os << output.get_modulus() << "(cos(" << output.get_argument() 
         << ") + isin(" << output.get_argument() << ")\n";
