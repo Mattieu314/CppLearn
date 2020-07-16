@@ -1,13 +1,21 @@
-// check_double.hpp
-#ifndef CHECK_DOUBLE_HPP //include guard
-#define CHECK_DOUBLE_HPP
+// sin.cpp
 
-#include <iostream>
-#include <string>
-#include <sstream>
+#include "sin.hpp"
+using namespace mio;
 
-// Checks that there is a number before and after the decimal point
-bool check_point(std::string str_input, int point_pos){
+// Defualt constructor
+inp::inp(){
+
+
+};
+
+inp::inp(std::string & inp_type){
+    type = inp_type;
+};
+
+// --- Private member functions ---
+
+bool inp::check_point(std::string & str_input, int & point_pos){
     try {
         if (std::isdigit(str_input[point_pos-1]) \
                 && std::isdigit(str_input[point_pos+1]))
@@ -20,8 +28,8 @@ bool check_point(std::string str_input, int point_pos){
     };
 };
 
-// Checks that there is a number before and after the exponent ('e'/'E')
-bool check_exp(std::string str_input, int exp_pos){
+// Check that there is a number before and after the exponent 
+bool inp::check_exp(std::string & str_input, int & exp_pos){
     try {
         if (std::isdigit(str_input[exp_pos-1]) \
                 && std::isdigit(str_input[exp_pos+1]))
@@ -35,12 +43,7 @@ bool check_exp(std::string str_input, int exp_pos){
     }
 };
 
-// Checks that the input number is a double by:
-//       - Confirming it only contains acceptable input
-//        - Has a number before and after a point, if it exists
-//        - Has a number before and after the e, it it exists
-
-bool is_double(std::string input) {
+bool inp::is_double(std::string & input){
     int acceptable = 0; // Number of accetable characters (0-9 . e E). (Accept: ==lenght)
     int point = 0; // Number of decimal points. (Accept: 0 or 1)
     int exp = 0;   // Number of exponents. (Accept: 0 or 1)
@@ -85,4 +88,21 @@ bool is_double(std::string input) {
         return false;
 };
 
-#endif
+bool inp::is_int(std::string & input){
+    int acceptable = 0; // Number of acceptable characters
+    for (int i = 0; i < (int) input.size(); i++){
+        if (std::isdigit(input[i]))
+                acceptable++;
+    };
+    if (acceptable == (int) input.size())
+        return true;
+    else
+        return false;
+};
+
+
+
+std::istream &operator>>(std::istream & is){
+    if (inpc.)
+};
+
