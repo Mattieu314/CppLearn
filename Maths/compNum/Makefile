@@ -8,9 +8,9 @@ compNum: $(OBJS)
 	$(CXX) $(CXXFLAGS) -o compNum $(OBJS)
 
 compNum.o: compNum.cpp complex.hpp
-	$(CXX) $(CXXFLAGS) -c compNum.cpp complex.o
+	$(CXX) $(CXXFLAGS) -c compNum.cpp
 
-complex.o: complex.cpp complex.hpp getInp.hpp
+complex.o: complex.cpp complex.hpp chkType.hpp getInp.hpp
 	$(CXX) $(CXXFLAGS) -c complex.cpp
 
 
