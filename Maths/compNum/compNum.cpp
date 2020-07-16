@@ -4,30 +4,6 @@
 #include "complex.hpp"
 #include "doubleCheck.hpp"
 
-// Get user input of whether they will enter the number in cartesian form
-// or polar form 
-bool user_type() {
-    std::string valid_options = "cCpP";
-    std::string input; 
-    bool polar;     // Polar: polar = true; Cartesian: polar = false
-
-    std::cout << "Would you like to enter the complex number in polar (p) or cartesian (c) form: ";
-    std::getline(std::cin, input);
-
-    while (input.size() != 1 || valid_options.find(input) == std::string::npos) {
-        std::cout << "This is an invalid input, please enter c or p:\n";
-        std::getline(std::cin, input);
-    };
-
-    if (input == "c" || input == "C") {
-      polar = false;
-    }
-    else{
-      polar = true;
-    };
-    return polar;
-};
-
 // Check whether complex number is 0
 bool is_zero(double a, double b, bool polar = true){
     if (polar == true){
