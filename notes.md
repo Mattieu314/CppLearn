@@ -7,3 +7,10 @@
     - Check int
     - Check zero
     - check certain characters 
+
+types:
+    - string
+    - char
+    - double
+    - float
+    - int

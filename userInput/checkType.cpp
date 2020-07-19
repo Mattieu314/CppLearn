@@ -1,12 +1,11 @@
-// chkType.hpp
-#ifndef CHKTYPE_HPP //include guard
-#define CHKTYPE_HPP
-
 #include <iostream>
-#include <string>
+#include <sstream>
 
+#include "checkType.hpp"
+#include "getInput.hpp"
+namespace inp{
 // ------------ Check Double -------------
-
+// Hello check
 // Checks that there is a number before and after the decimal point
 bool check_point(std::string str_input, int point_pos){
     try {
@@ -99,5 +98,4 @@ bool is_int(std::string input){
     else
         return false;
 };
-
-#endif
+}

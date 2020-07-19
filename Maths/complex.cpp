@@ -3,7 +3,7 @@
 #include <cmath>
 
 #include "complex.hpp"
-#include "getInp.hpp"
+#include "../userInput/getInput.hpp"
 
 // Object initialisation 
 // Defualt constructor 
@@ -95,18 +95,18 @@ namespace math{
             {
                 std::cout << "\n====================\n";
                 std::cout << "Enter the real part: ";
-                inp_a = get_double();
+                inp_a = inp::get_double();
                 std::cout << "Enter the imaginary part: ";
-                inp_b = get_double();
+                inp_b = inp::get_double();
                 std::cout << "====================\n";
             }
             else 
             {
                 std::cout << "\n====================\n";
                 std::cout << "Enter the modulus: ";
-                inp_a = get_double();
+                inp_a = inp::get_double();
                 std::cout << "Enter the argument: ";
-                inp_b = get_double();
+                inp_b = inp::get_double();
                 std::cout << "====================\n";
             };
             zero = is_zero(inp_a, inp_b, polar);
@@ -223,5 +223,10 @@ namespace math{
             os << output.calc_real() << " + " << output.calc_imag() << "i.\n";
         // Return output stream
         return os;
+    };
+
+    std::istream &operator>>(std::ostream &is, complex &input){
+        
+
     };
 }

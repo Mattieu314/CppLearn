@@ -43,7 +43,7 @@ namespace math {
             complex operator/ (const complex &);
 
             friend std::ostream &operator<<(std::ostream &, const complex &);
-
+            friend std::istream &operator>>(std::istream &, const complex &);
     };
 }
 #endif 

@@ -1,10 +1,11 @@
-// getInp.hpp
-#ifndef GETINP_HPP //include guard
-#define GETINP_HPP
-
+#include <iostream>
+#include <string>
 #include <sstream>
 
-#include "chkType.hpp"
+
+#include "getInput.hpp"
+#include "checkType.hpp"
+namespace inp{
 
 int get_int(){
     std::string str_input;
@@ -31,5 +32,4 @@ double get_double(){
     std::stringstream(str_input) >> double_input;
     return double_input;
 };
-
-#endif
+}
