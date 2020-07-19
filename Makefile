@@ -18,7 +18,7 @@ TARGET = TestMath
 # SRCS = $(foreach dir,$(SRCDIRS),$(wildcard $(dir)/*.cpp))
 
 MLIBDIR = $(SRCDIR)/userInput
-MSRCDIR = $(SRCDIR)/Maths
+MSRCDIR = $(SRCDIR)/maths
 MMAINDIR = $(SRCDIR)/TestMaths
 
 _SRCS := main.cpp complex.cpp checkType.cpp getInput.cpp
