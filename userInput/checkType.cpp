@@ -1,39 +1,34 @@
 #include <iostream>
-#include <sstream>
+#include <string>
+
 
 #include "checkType.hpp"
 #include "getInput.hpp"
+
 namespace inp{
 // ------------ Check Double -------------
 // Hello check
 // Checks that there is a number before and after the decimal point
 bool check_point(std::string str_input, int point_pos){
-    try {
-        if (std::isdigit(str_input[point_pos-1]) \
-                && std::isdigit(str_input[point_pos+1]))
-            return true;
-        else
-            return false;
-    }
-    catch (const std::out_of_range){
+    if (point_pos == 0 || point_pos ==(int) str_input.size())
         return false;
-    };
-};
+    else if (std::isdigit(str_input[point_pos-1]) \
+            && std::isdigit(str_input[point_pos+1]))
+        return true;
+    else
+        return false;
+}
 
 // Checks that there is a number before and after the exponent ('e'/'E')
 bool check_exp(std::string str_input, int exp_pos){
-    try {
-        if (std::isdigit(str_input[exp_pos-1]) \
-                && std::isdigit(str_input[exp_pos+1]))
-            return true;
-        else
-            return false;
-    }
-    catch (const std::out_of_range)
-    {
+    if (exp_pos == 0 || exp_pos == (int) str_input.size())
         return false;
-    }
-};
+    else if (std::isdigit(str_input[exp_pos-1]) \
+            && std::isdigit(str_input[exp_pos+1]))
+        return true;
+    else
+        return false;
+}
 
 // Checks that the input number is a double by:
 //       - Confirming it only contains acceptable input

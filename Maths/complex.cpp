@@ -3,7 +3,7 @@
 #include <cmath>
 
 #include "complex.hpp"
-#include "../userInput/getInput.hpp"
+#include "getInput.hpp"
 
 // Object initialisation 
 // Defualt constructor 

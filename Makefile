@@ -31,7 +31,7 @@ INCLUDES = -I$(MLIBDIR) -I$(MSRCDIR)
 DEPFILES := $(_SRCS:%.cpp=$(DEPDIR)/%.d)
 COMPILECXX = $(CXX) $(CXXFLAGS) $(DEPFLAGS) $(INCLUDES) -c
 
-.PHONY: all clean
+.PHONY: all clean depclean
 
 all: $(TARGET)
 
@@ -57,3 +57,6 @@ include $(wildcard $(DEPFILES))
 clean:
 	rm -f $(OBJS)
 	rm -f $(TARGET)
+
+depclean:
+	rm -f $(DEPFILES)

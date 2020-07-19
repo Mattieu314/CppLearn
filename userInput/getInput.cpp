@@ -2,9 +2,9 @@
 #include <string>
 #include <sstream>
 
-
 #include "getInput.hpp"
 #include "checkType.hpp"
+
 namespace inp{
 
 int get_int(){
@@ -18,7 +18,7 @@ int get_int(){
     int int_input;
     std::stringstream(str_input) >> int_input;
     return int_input;
-};
+}
 
 double get_double(){
     std::string str_input;
@@ -31,5 +31,5 @@ double get_double(){
     double double_input;
     std::stringstream(str_input) >> double_input;
     return double_input;
-};
+}
 }
