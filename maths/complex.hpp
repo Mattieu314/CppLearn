@@ -10,40 +10,39 @@
 
 namespace math {
 
+class complex{
+    private:
+        double modulus;     // Modulus (r)
+        double argument;    // Argument (theta)
 
-    class complex{
-        private:
-            double modulus;     // Modulus (r)
-            double argument;    // Argument (theta)
+        double calc_modulus(double, double);  
+        double calc_arg(double, double);
+        bool get_type();
+        bool is_zero(double, double, bool polar = true);
+        complex get_user();
+        bool inp_polar;
 
-            double calc_modulus(double, double);  
-            double calc_arg(double, double);
-            bool get_type();
-            bool is_zero(double, double, bool polar = true);
-            complex get_user();
-            bool inp_polar;
+    public:
+        complex();      // Defualt constructor
+        complex(double, double, bool polar = true); // Parameterised constructor
+        ~complex();
 
-        public:
-            complex();      // Defualt constructor
-            complex(double, double, bool polar = true); // Parameterised constructor
-            ~complex();
+        double get_modulus() const;
+        double get_argument() const;
+        bool get_polar() const;
+        double calc_real() const; // Calculate and return real part
+        double calc_imag() const; // Calculate and return imaginary part
 
-            double get_modulus() const;
-            double get_argument() const;
-            bool get_polar() const;
-            double calc_real() const; // Calculate and return real part
-            double calc_imag() const; // Calculate and return imaginary part
+        complex pow(int); // Calculate the power of the complex number
+        std::vector<complex> calc_roots(int); // Calculate th e nth roots of the comlex number
+        // Overloaded operators
+        complex operator+ (const complex &);
+        complex operator- (const complex &);
+        complex operator* (const complex &);
+        complex operator/ (const complex &);
 
-            complex pow(int); // Calculate the power of the complex number
-            std::vector<complex> calc_roots(int); // Calculate th e nth roots of the comlex number
-            // Overloaded operators
-            complex operator+ (const complex &);
-            complex operator- (const complex &);
-            complex operator* (const complex &);
-            complex operator/ (const complex &);
-
-            friend std::ostream &operator<<(std::ostream &, const complex &);
-            friend std::istream &operator>>(std::istream &, const complex &);
-    };
+        friend std::ostream &operator<<(std::ostream &, const complex &);
+        friend std::istream &operator>>(std::istream &, const complex &);
+};
 }
 #endif 

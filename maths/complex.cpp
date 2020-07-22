@@ -7,7 +7,6 @@
 
 // Object initialisation 
 // Defualt constructor 
-
 namespace math{
 
     complex::complex(){
@@ -223,10 +222,5 @@ namespace math{
             os << output.calc_real() << " + " << output.calc_imag() << "i.\n";
         // Return output stream
         return os;
-    };
-
-    std::istream &operator>>(std::ostream &is, complex &input){
-        
-
     };
 }

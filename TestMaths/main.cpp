@@ -3,8 +3,7 @@
 #include <sstream>
 
 #include "complex.hpp"
-
-int main(){
+void compTest(){
     std::string input;
     
     math::complex A(1,1, false);
@@ -31,5 +30,11 @@ int main(){
     for (int i = 0 ; i < (int) roots.size(); i++){
         std::cout << roots[i];
     };
+
+}
+
+int main(){
+
+
     return 0 ;
 };
