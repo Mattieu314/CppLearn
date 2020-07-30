@@ -5,21 +5,22 @@
 #include "complex.hpp"
 #include "getInput.hpp"
 
+
 // Object initialisation 
 // Defualt constructor 
 namespace math{
-
     complex::complex(){
         std::cout << " -- Constructing (defualt) object of type complex --" << std::endl;
         modulus = 0;
         argument = 0;
-    };
-
+    }
+  
     // Parameterised constructor
     // If user enters cartesian coordinates (polar == false),
     // then modulus and argument are calculated
 
     complex::complex(double inp_a, double inp_b, bool polar) {
+
         if (polar == true) {
             modulus = inp_a;
             argument = inp_b;
@@ -32,7 +33,7 @@ namespace math{
             inp_polar = false;
             std::cout << "-- Constructing object of type complex --\n" << std::endl;
         };
-    };
+    }
 
     complex::~complex(){
         std::cout << "-- Destructing object of type complex --\n";
@@ -63,7 +64,7 @@ namespace math{
         return polar;
     };
 
-    bool complex::is_zero(double a, double b, bool polar){
+    bool complex::is_zero(double a, double b, bool polar = true){
         if (polar == true){
             if (a == 0)
             {
@@ -83,7 +84,7 @@ namespace math{
             else
                 return false;
         };
-    };
+    }
 
     complex complex::get_user(){
         double inp_a, inp_b;
@@ -114,36 +115,36 @@ namespace math{
         complex num(inp_a, inp_b, polar);
         return num;
 
-    };
+    }
 
     // Calculate modulus from real and imaginary parameters 
     double complex::calc_modulus(double real, double imaginary){
         modulus = std::sqrt(real*real + imaginary*imaginary);
         return modulus;
-    };
+    }
 
     // Calculate argument from real and imaginary paramaters
     double complex::calc_arg(double real, double imaginary){
         argument = std::atan2(imaginary, real);
         return argument;
-    };
+    }
 
     // Public member functions
 
     // Return modulus
     double complex::get_modulus() const{
         return modulus;
-    };
+    }
 
     // Return argument
     double complex::get_argument() const{
         return argument;
-    };
+    }
 
     double complex::calc_real() const{
         double real = modulus*std::cos(argument);
         return real;
-    };
+    }
 
     double complex::calc_imag() const{
         double imaginary = modulus*std::sin(argument);
@@ -152,7 +153,7 @@ namespace math{
 
     bool complex::get_polar() const{
         return inp_polar;
-    };
+    }
 
 
     std::vector<complex> complex::calc_roots(int n){
@@ -170,46 +171,91 @@ namespace math{
             roots.push_back(temp_complex);
         };
         return roots;
-    };
+    }
 
     complex complex::pow(int n){
         double temp_mod = std::pow(get_modulus(),n);
         double temp_arg = get_argument() * n;
         complex temp_comp(temp_mod, temp_arg);
         return temp_comp;
-    };
+    }
 
     // Overloaded Operators
 
-    complex complex::operator+ (const complex &complex_input){
+    complex complex::operator+(const complex &complex_input){
         double temp_real = calc_real() + complex_input.calc_real();
         double temp_imag = calc_imag() + complex_input.calc_imag();
         complex temp_complex(temp_real, temp_imag, false);
         return temp_complex;
-    };
+    }
 
-    complex complex::operator- (const complex &complex_input){
+    complex complex::operator-(const complex &complex_input){
         double temp_real = calc_real() - complex_input.calc_real();
         double temp_imag = calc_imag() - complex_input.calc_imag();
         complex temp_complex(temp_real,temp_imag, false);
         return temp_complex;
-    };
+    }
 
-    complex complex::operator* (const complex &complex_input){
+    complex complex::operator*(const complex &complex_input){
         double temp_mod = modulus * complex_input.get_modulus();
         double temp_arg = argument + complex_input.get_argument();
 
         complex temp_complex(temp_mod, temp_arg);
         return temp_complex;
-    };
+    }
 
-    complex complex::operator/ (const complex &complex_input){
+    complex complex::operator/(const complex &complex_input){
         double temp_mod = modulus / complex_input.get_modulus();
         double temp_arg = argument - complex_input.get_argument();
 
         complex temp_complex(temp_mod, temp_arg);
         return temp_complex;
-    };
+    }
+
+    complex complex::operator+=(complex & num){
+        double temp_real = this->calc_real() + num.calc_real();
+        double temp_imag = this->calc_imag() + num.calc_imag();
+
+        this->set_cart(temp_real, temp_imag);
+
+        return *this;
+    }
+
+    void complex::set_cart(double inp_real, double inp_imag){
+        modulus = calc_modulus(inp_real, inp_real);
+        argument = calc_arg(inp_real, inp_imag);
+    }
+
+
+
+// TODO: Templates!!
+
+    bool complex::operator==(const complex & num){
+        if (modulus == num.get_modulus() && argument == num.get_argument())
+            return true;
+        else
+            return false;
+    }
+
+    bool complex::operator==(const int & num){
+        if (modulus == (double) num && argument == 0) // TODO: make sure this works for negative nnumbers too
+            return true;
+        else 
+            return false;
+    }
+
+    bool complex::operator!=(const int & num){
+        if (modulus != (double) num and argument ==0)
+            return true;
+        else
+            return false;
+    }
+    bool complex::operator!=(const complex & num){
+        if (modulus != num.get_modulus() || argument != num.get_argument())
+            return true;
+        else
+            return false;
+    }
 
     std::ostream &operator<<(std::ostream &os, const complex &output){
         // Define output stream, dependant on input type
@@ -222,5 +268,5 @@ namespace math{
             os << output.calc_real() << " + " << output.calc_imag() << "i.\n";
         // Return output stream
         return os;
-    };
+    }
 }
