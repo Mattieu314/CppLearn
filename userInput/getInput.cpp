@@ -6,7 +6,7 @@
 #include "checkType.hpp"
 
 namespace inp{
-
+/*
 int get_int(){
     std::string str_input;
     std::getline(std::cin, str_input);
@@ -32,4 +32,6 @@ double get_double(){
     std::stringstream(str_input) >> double_input;
     return double_input;
 }
+*/
+
 }
